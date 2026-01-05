@@ -1,0 +1,24 @@
+# Banking Transaction Processing System - Python Dependencies
+# Production-quality banking system with ACID guarantees
+
+# Web Framework - FastAPI for modern async REST APIs
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+
+# Database ORM - SQLAlchemy for database operations
+sqlalchemy==2.0.23
+
+# Database Driver - SQLite (included in Python, but using aiosqlite for async)
+aiosqlite==0.19.0
+
+# Validation - Pydantic for request/response validation
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Date/Time handling
+python-dateutil==2.8.2
+
+# Testing (optional, for development)
+pytest==7.4.3
+pytest-asyncio==0.21.1
+
