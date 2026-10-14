@@ -248,11 +248,22 @@ uvicorn src.main:app --host 0.0.0.0 --port 8080 --reload
 
 See `API_EXAMPLES.md` for detailed API request examples.
 
-### Automated Testing (Future Enhancement)
+### Automated Testing (pytest)
+
+The system is covered by automated pytest tests verifying core transaction endpoints, business rules, limits, and ACID guarantees:
 
 ```bash
-pytest tests/
+# Run all tests
+pytest tests/ -v
 ```
+
+**Test Coverage:**
+- `test_deposit_increases_balance`: Verifies deposits correctly increase account balance.
+- `test_overdraft_rejected_and_balance_unchanged`: Verifies overdraft requests are rejected and account balance remains unchanged.
+- `test_withdrawal_over_daily_limit_rejected`: Enforces daily withdrawal limits ($10,000 max per day) with 429/4xx rejection.
+- `test_transfer_is_atomic_and_conserves_money`: Verifies atomic multi-account transfers conserve total money.
+- `test_duplicate_transaction_within_60s_rejected`: Verifies immediate duplicate transactions within the 60-second window are rejected.
+
 
 ## Migration to PostgreSQL
 
@@ -313,6 +324,9 @@ banking-system/
 │       ├── base.py
 │       ├── account.py
 │       └── transaction_log.py
+├── tests/
+│   ├── __init__.py
+│   └── test_transactions.py    # Automated API tests
 ├── requirements.txt
 ├── .gitignore
 └── README.md
